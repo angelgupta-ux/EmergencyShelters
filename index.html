@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aegis | Emergency Shelter System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <!-- Using Google Material Icons for scalability -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebarglass">
+            <div class="logo-area">
+                <span class="material-icons-round icon-logo">shield</span>
+                <h2>AEGIS</h2>
+            </div>
+            <nav class="nav-links">
+                <button class="nav-btn active" data-view="dashboard">
+                    <span class="material-icons-round">dashboard</span>
+                    <span>Overview</span>
+                </button>
+                <button class="nav-btn" data-view="power">
+                    <span class="material-icons-round">bolt</span>
+                    <span>Power</span>
+                </button>
+                <button class="nav-btn" data-view="safety">
+                    <span class="material-icons-round">security</span>
+                    <span>Safety</span>
+                </button>
+                <button class="nav-btn" data-view="services">
+                    <span class="material-icons-round">water_drop</span>
+                    <span>Services</span>
+                </button>
+                <button class="nav-btn" data-view="navigation">
+                    <span class="material-icons-round">map</span>
+                    <span>Navigation</span>
+                </button>
+            </nav>
+            <div class="system-status">
+                <div class="status-indicator online"></div>
+                <span>System Online</span>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="top-bar">
+                <div class="breadcrumbs">
+                    <h1>System Overview</h1>
+                    <p id="current-time">--:--</p>
+                </div>
+                <div class="notifications">
+                    <button class="icon-btn">
+                        <span class="material-icons-round">notifications</span>
+                        <span class="badge" id="alert-count">0</span>
+                    </button>
+                    <div class="user-profile">
+                        <div class="avatar">OP</div>
+                        <span>Operator</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Grid -->
+            <div class="dashboard-grid" id="main-view">
+
+                <!-- Power Card -->
+                <div class="card power-card">
+                    <div class="card-header">
+                        <h3>Power Systems</h3>
+                        <span class="material-icons-round status-icon">bolt</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="metric-big">
+                            <span id="battery-level">--</span><small>%</small>
+                        </div>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar" id="battery-bar" style="width: 0%"></div>
+                        </div>
+                        <div class="sub-metrics">
+                            <div class="sub-metric">
+                                <span class="label">Solar Input</span>
+                                <span class="value" id="solar-input">0 kW</span>
+                            </div>
+                            <div class="sub-metric">
+                                <span class="label">Usage</span>
+                                <span class="value" id="power-usage">0 kW</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Safety Card -->
+                <div class="card safety-card">
+                    <div class="card-header">
+                        <h3>Environment & Safety</h3>
+                        <span class="material-icons-round status-icon">thermostat</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="env-grid">
+                            <div class="env-item">
+                                <span class="material-icons-round">thermostat</span>
+                                <span class="value" id="temp-val">--°C</span>
+                                <span class="label">Internal</span>
+                            </div>
+                            <div class="env-item">
+                                <span class="material-icons-round">air</span>
+                                <span class="value" id="air-quality">Good</span>
+                                <span class="label">Air Quality</span>
+                            </div>
+                            <div class="env-item">
+                                <span class="material-icons-round">local_fire_department</span>
+                                <span class="value" id="fire-status">Safe</span>
+                                <span class="label">Fire Risk</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Resources Card -->
+                <div class="card resources-card">
+                    <div class="card-header">
+                        <h3>Essential Services</h3>
+                        <span class="material-icons-round status-icon">water_drop</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="resource-item">
+                            <div class="res-header">
+                                <span>Water Tank</span>
+                                <span id="water-level-text">--%</span>
+                            </div>
+                            <div class="progress-bar-container">
+                                <div class="progress-bar water" id="water-bar" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        <div class="toggle-group">
+                            <div class="toggle-item">
+                                <span>Main Lights</span>
+                                <label class="switch">
+                                    <input type="checkbox" id="lights-toggle" checked>
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                            <div class="toggle-item">
+                                <span>Door Locks</span>
+                                <label class="switch">
+                                    <input type="checkbox" id="locks-toggle" checked>
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Log / Notification Feed -->
+                <div class="card logs-card">
+                    <div class="card-header">
+                        <h3>System Logs</h3>
+                        <span class="material-icons-round">history</span>
+                    </div>
+                    <div class="card-body">
+                        <ul class="log-list" id="log-list">
+                            <!-- Logs will be injected here -->
+                            <li class="log-entry system"><span class="time">Now</span> System initialized.</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Navigation View (Hidden by default) -->
+            <div class="dashboard-grid hidden" id="navigation-view">
+
+                <!-- Scanner Card -->
+                <div class="card scanner-card">
+                    <div class="card-header">
+                        <h3>Environmental Scanner</h3>
+                        <span class="material-icons-round status-icon">radar</span>
+                    </div>
+                    <div class="card-body centered-body">
+                        <div class="scanner-visual" id="scanner-visual">
+                            <div class="radar-sweep"></div>
+                        </div>
+                        <button class="action-btn" id="scan-btn">
+                            <span class="material-icons-round">travel_explore</span>
+                            START SCAN
+                        </button>
+                        <div class="scan-results hidden" id="scan-results">
+                            <div class="result-row">
+                                <span class="label">Radiation</span>
+                                <span class="value danger" id="rad-val">-- uSv/hr</span>
+                            </div>
+                            <div class="result-row">
+                                <span class="label">Weather</span>
+                                <span class="value" id="weather-val">--</span>
+                            </div>
+                            <div class="result-row">
+                                <span class="label">Wind Speed</span>
+                                <span class="value" id="wind-val">-- km/h</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Shelter List Card -->
+                <div class="card shelter-card">
+                    <div class="card-header">
+                        <h3>Nearby Shelters</h3>
+                        <span class="material-icons-round status-icon">near_me</span>
+                    </div>
+                    <div class="card-body">
+                        <ul class="shelter-list" id="shelter-list">
+                            <li class="empty-msg">Scan location to find shelters...</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
